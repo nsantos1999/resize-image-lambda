@@ -1,0 +1,8 @@
+{
+  "name": "resize-image",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/nsantos1999/resize-image-lambda.git",
+  "author": "Nata Souza Santos <natasouza.santos50@gmail.com>",
+  "license": "MIT"
+}
