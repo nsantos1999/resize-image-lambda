@@ -26,8 +26,8 @@ jobs:
       - name: default deploy
         uses: appleboy/lambda-action@master
         with:
-          aws_access_key_id: ${{ aws_prod.AWS_ACCESS_KEY_ID }}
-          aws_secret_access_key: ${{ aws_prod.AWS_SECRET_ACCESS_KEY }}
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws_region: sa-east-1
           function_name: compressImage
           zip_file: bundle.zip
