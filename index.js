@@ -20,6 +20,20 @@ async function getContentFile(bucket, key) {
   }
 }
 
+async function uploadFile(bucket, key, body) {
+  const params = {
+    Bucket: bucket,
+    Key: `resized/${key}`,
+    Body: body,
+  };
+
+  try {
+    await s3.upload(params).promise();
+  } catch (err) {
+    throw new Error("We have a problem to upload file");
+  }
+}
+
 exports.handler = async (event) => {
   // TODO implement
 
@@ -30,18 +44,12 @@ exports.handler = async (event) => {
 
   const imageUploaded = await getContentFile(bucket, key);
 
-  const params = {
-    Bucket: bucket,
-    Key: `resized/${key}`,
-    Body: imageUploaded,
-  };
-
   try {
-    await s3.upload(params).promise();
+    await uploadFile(bucket, `resized/${key}`, imageUploaded);
 
     const response = {
       statusCode: 200,
-      body: JSON.stringify({ message: "Resize problem" }),
+      body: JSON.stringify({ message: "Image resized" }),
     };
 
     return response;
