@@ -10,9 +10,8 @@ async function getContentFile(bucket, key) {
   };
 
   try {
-    const { ContentType } = await s3.getObject(params).promise();
-    console.log("CONTENT TYPE:", ContentType);
-    return ContentType;
+    const { Body } = await s3.getObject(params).promise();
+    return Body;
   } catch (err) {
     console.log(err);
     const message = `Error getting object ${key} from bucket ${bucket}. Make sure they exist and your bucket is in the same region as this function.`;
