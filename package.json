@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/nsantos1999/resize-image-lambda/issues"
   },
-  "homepage": "https://github.com/nsantos1999/resize-image-lambda#readme"
+  "homepage": "https://github.com/nsantos1999/resize-image-lambda#readme",
+  "dependencies": {
+    "resize-img": "^2.0.0"
+  }
 }

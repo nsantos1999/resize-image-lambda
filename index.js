@@ -1,4 +1,5 @@
 const aws = require("aws-sdk");
+const resizeImg = require("resize-img");
 
 const s3 = new aws.S3({ apiVersion: "2006-03-01" });
 
@@ -34,18 +35,28 @@ async function uploadFile(bucket, key, body) {
   }
 }
 
+async function resizeImage(imageContent) {
+  const image = await resizeImg(imageContent, {
+    width: 128,
+    height: 128,
+  });
+
+  return image;
+}
+
 exports.handler = async (event) => {
   // TODO implement
-
   const bucket = event.Records[0].s3.bucket.name;
   const key = decodeURIComponent(
     event.Records[0].s3.object.key.replace(/\+/g, " ")
   );
 
-  const imageUploaded = await getContentFile(bucket, key);
-
   try {
-    await uploadFile(bucket, `resized/${key}`, imageUploaded);
+    const imageUploaded = await getContentFile(bucket, key);
+
+    const imageResized = await resizeImage(imageUploaded);
+
+    await uploadFile(bucket, `resized/${key}`, imageResized);
 
     const response = {
       statusCode: 200,
@@ -61,10 +72,4 @@ exports.handler = async (event) => {
 
     return response;
   }
-
-  // const response = {
-  //   statusCode: 200,
-  //   body: JSON.stringify("Hello world lamba CD"),
-  // };
-  // return response;
 };
