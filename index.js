@@ -1,7 +1,8 @@
-const aws = require("aws-sdk");
-const resizeImg = require("resize-img");
+// const aws = require("aws-sdk");
+const fs = require("fs");
+const jimp = require("jimp");
 
-const s3 = new aws.S3({ apiVersion: "2006-03-01" });
+// const s3 = new aws.S3({ apiVersion: "2006-03-01" });
 
 async function getContentFile(bucket, key) {
   const params = {
@@ -36,12 +37,11 @@ async function uploadFile(bucket, key, body) {
 }
 
 async function resizeImage(imageContent) {
-  const image = await resizeImg(imageContent, {
-    width: 128,
-    height: 128,
-  });
+  const jimpImage = await jimp.read(imageContent);
 
-  return image;
+  jimpImage.scale(0.1);
+
+  return await jimpImage.getBufferAsync(jimpImage.getMIME());
 }
 
 exports.handler = async (event) => {
@@ -78,3 +78,13 @@ exports.handler = async (event) => {
     return response;
   }
 };
+
+async function runTest() {
+  const resizedImageTest = await resizeImage(
+    fs.readFileSync("/home/nata/Imagens/minion.jpg")
+  );
+
+  fs.writeFileSync("/home/nata/Imagens/resized/minion.jpg", resizedImageTest);
+}
+
+// runTest();

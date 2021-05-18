@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,6 +19,6 @@
   },
   "homepage": "https://github.com/nsantos1999/resize-image-lambda#readme",
   "dependencies": {
-    "resize-img": "^2.0.0"
+    "jimp": "^0.16.1"
   }
 }
