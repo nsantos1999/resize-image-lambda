@@ -26,7 +26,7 @@ async function uploadFile(bucket, key, body) {
     Bucket: bucket,
     Key: `resized/${key}`,
     Body: body,
-    ACL: "public-read",
+    // ACL: "public-read",
   };
 
   try {
