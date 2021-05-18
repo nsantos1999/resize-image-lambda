@@ -26,7 +26,7 @@ async function uploadFile(bucket, key, body) {
     Bucket: bucket,
     Key: `resized/${key}`,
     Body: body,
-    // ACL: "public-read",
+    ACL: "public-read",
   };
 
   try {
@@ -56,10 +56,10 @@ exports.handler = async (event) => {
     const imageUploaded = await getContentFile(bucket, key);
 
     console.log("resizeImage...");
-    // const imageResized = await resizeImage(imageUploaded);
+    const imageResized = await resizeImage(imageUploaded);
 
     console.log("uploadFile...");
-    await uploadFile(bucket, `resized/${key}`, imageUploaded);
+    await uploadFile(bucket, `resized/${key}`, imageResized);
 
     console.log("Finishing...");
     const response = {
