@@ -12,7 +12,7 @@ async function getContentFile(bucket, key) {
 
   try {
     const { Body } = await s3.getObject(params).promise();
-    return Body;
+    return Body.buffer;
   } catch (err) {
     console.log(err);
     const message = `Error getting object ${key} from bucket ${bucket}. Make sure they exist and your bucket is in the same region as this function.`;
@@ -69,6 +69,7 @@ exports.handler = async (event) => {
 
     return response;
   } catch (err) {
+    console.log("handling error...");
     console.log(err.message);
     const response = {
       statusCode: 500,
