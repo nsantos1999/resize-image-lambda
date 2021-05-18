@@ -1,8 +1,8 @@
-// const aws = require("aws-sdk");
+const aws = require("aws-sdk");
 const fs = require("fs");
 const jimp = require("jimp");
 
-// const s3 = new aws.S3({ apiVersion: "2006-03-01" });
+const s3 = new aws.S3({ apiVersion: "2006-03-01" });
 
 async function getContentFile(bucket, key) {
   const params = {
