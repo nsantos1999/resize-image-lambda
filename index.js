@@ -69,8 +69,7 @@ exports.handler = async (event) => {
 
     return response;
   } catch (err) {
-    console.log("handling error...");
-    console.log(err.message);
+    console.log("handling error...", err.message);
     const response = {
       statusCode: 500,
       body: JSON.stringify({ message: "Resize problem" }),
