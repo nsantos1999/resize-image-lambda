@@ -55,7 +55,7 @@ exports.handler = async (event) => {
     console.log("getContentFile...");
     const imageUploaded = await getContentFile(bucket, key);
 
-    // console.log("resizeImage...");
+    console.log("resizeImage...");
     // const imageResized = await resizeImage(imageUploaded);
 
     console.log("uploadFile...");
